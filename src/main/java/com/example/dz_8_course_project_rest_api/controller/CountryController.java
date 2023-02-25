@@ -38,4 +38,23 @@ public class CountryController {
     public List<Country>getCountryByName(@PathVariable String name){
         return countryService.getCountryByName(name);
     }
+
+    @DeleteMapping("/{id}")
+    public String deleteCountryById(@PathVariable int id){
+        String result;
+
+        if(countryService.getCountryById(id)!=null){
+            countryService.deleteCountryById(id);
+            if(countryService.getCountryById(id)==null){
+                result = "Country was deleted";
+            }else {
+                result = "Country was not deleted";
+            }
+        }else {
+            result = "The id is not in the database"; // повідомлення у разі відсутності об'єкта з вказаним id у БД
+        }
+        return result;
+    }
+
+
 }

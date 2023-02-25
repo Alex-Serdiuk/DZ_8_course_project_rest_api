@@ -29,10 +29,14 @@ public class Car {
     @JsonIgnore
     private Brand brand;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "car")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "car")
     private List<Order> orderList = new ArrayList<>();
 
     public Car() {
+    }
+
+    public Car(Car car) {
+        this.id = car.id;
     }
 
     public Car(String modelName, String vinNumber, String licenseNumber) {

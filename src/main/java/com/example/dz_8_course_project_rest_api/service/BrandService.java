@@ -12,4 +12,6 @@ public interface BrandService {
     Brand getBrandById(int id);
 
     List<Brand> getBrandByName(String name);
+
+    void deleteBrandyId(int id);
 }

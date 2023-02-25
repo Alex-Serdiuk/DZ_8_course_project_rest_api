@@ -36,4 +36,21 @@ public class BrandController {
     public List<Brand>getBrandsByName(@PathVariable String name){
         return brandService.getBrandByName(name);
     }
+
+    @DeleteMapping("brands/{id}")
+    public String deleteBrandById(@PathVariable int id){
+        String result;
+
+        if(brandService.getBrandById(id)!=null){
+            brandService.deleteBrandyId(id);
+            if(brandService.getBrandById(id)==null){
+                result = "Brand was deleted";
+            }else {
+                result = "Brand was not deleted";
+            }
+        }else {
+            result = "The id is not in the database"; // повідомлення у разі відсутності об'єкта з вказаним id у БД
+        }
+        return result;
+    }
 }

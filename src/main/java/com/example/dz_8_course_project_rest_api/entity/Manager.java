@@ -24,10 +24,14 @@ public class Manager {
     @Column(name = "phone")
     private String phone;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manager")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "manager")
     private List<Order> orderList = new ArrayList<>();
 
     public Manager() {
+    }
+
+    public Manager(Manager manager) {
+        this.id = manager.getId();
     }
 
     public Manager(String firstName, String lastName, String phone) {

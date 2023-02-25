@@ -26,10 +26,14 @@ public class Client {
     @Column(name = "is_vip")
     private boolean isVip;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "client")
     private List<Order> orderList = new ArrayList<>();
 
     public Client() {
+    }
+
+    public Client(Client client) {
+        this.id = client.getId();
     }
 
     public Client(String firstName, String lastName, String phone, boolean isVip) {

@@ -44,6 +44,10 @@ public class Order {
     public Order() {
     }
 
+    public Order(Order order) {
+        this.id = order.getId();
+    }
+
     public Order(Calendar dateStart, Calendar dateFinish) {
         this.dateStart = dateStart;
         this.dateFinish = dateFinish;

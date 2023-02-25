@@ -20,10 +20,14 @@ public class Service {
     @Column(name = "price")
     private int servicePrice;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "service")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "service")
     private List<Order> orderList = new ArrayList<>();
 
     public Service() {
+    }
+
+    public Service(Service service) {
+        this.id = service.getId();
     }
 
     public Service(String serviceName, int servicePrice) {

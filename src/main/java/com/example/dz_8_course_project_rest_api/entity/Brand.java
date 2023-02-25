@@ -26,12 +26,15 @@ public class Brand {
     @JsonIgnore
     private Country country;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "brand")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "brand")
     private List<Car> cars = new ArrayList<>();
 
     public Brand() {
     }
 
+    public Brand(Brand brand) {
+        this.id = brand.getId();
+    }
     public Brand(String brandName) {
         this.brandName = brandName;
     }

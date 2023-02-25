@@ -5,12 +5,14 @@ import com.example.dz_8_course_project_rest_api.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 
 @Service
 public class CountryServiceImpl implements CountryService{
     @Autowired
     private CountryRepository countryRepository;
+
     @Override
     public List<Country> getAllCountries() {
         return countryRepository.findAll();
@@ -30,4 +32,11 @@ public class CountryServiceImpl implements CountryService{
     public List<Country> getCountryByName(String name) {
         return countryRepository.findAllByCountryName(name);
     }
+
+    @Override
+    public void deleteCountryById(int id) {
+     countryRepository.deleteById(id);
+    }
+
+
 }

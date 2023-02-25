@@ -17,13 +17,15 @@ public class Country {
     @Column(name = "name")
     private String countryName;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "country")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "country")
     private List<Brand> brands = new ArrayList<>();
 
     public Country() {
     }
 
-
+    public Country(Country country) {
+        this.id = country.getId();
+    }
 
     public int getId() {
         return id;

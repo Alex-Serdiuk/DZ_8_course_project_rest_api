@@ -12,4 +12,6 @@ public interface CountryService {
     Country getCountryById(int id);
 
     List<Country> getCountryByName(String name);
+
+    void deleteCountryById(int id);
 }

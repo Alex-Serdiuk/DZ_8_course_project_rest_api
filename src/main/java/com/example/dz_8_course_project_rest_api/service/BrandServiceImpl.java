@@ -30,4 +30,9 @@ public class BrandServiceImpl implements BrandService{
     public List<Brand> getBrandByName(String name) {
         return brandRepository.findAllByBrandName(name);
     }
+
+    @Override
+    public void deleteBrandyId(int id) {
+        brandRepository.deleteById(id);
+    }
 }
