@@ -30,4 +30,9 @@ public class CarServiceImpl implements CarService{
     public List<Car> getCarByName(String name) {
         return carRepository.findAllByModelName(name);
     }
+
+    @Override
+    public void deleteCarById(int id) {
+        carRepository.deleteById(id);
+    }
 }

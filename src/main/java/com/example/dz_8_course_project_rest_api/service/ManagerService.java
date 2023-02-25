@@ -12,4 +12,6 @@ public interface ManagerService {
     Manager getManagerById(int id);
 
     List<Manager> getManagerByLastName(String lastName);
+
+    void deleteManagerById(int id);
 }

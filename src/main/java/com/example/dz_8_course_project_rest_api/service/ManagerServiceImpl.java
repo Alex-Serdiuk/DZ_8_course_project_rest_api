@@ -30,4 +30,9 @@ public class ManagerServiceImpl  implements ManagerService{
     public List<Manager> getManagerByLastName(String lastName) {
         return managerRepository.findAllByLastName(lastName);
     }
+
+    @Override
+    public void deleteManagerById(int id) {
+        managerRepository.deleteById(id);
+    }
 }

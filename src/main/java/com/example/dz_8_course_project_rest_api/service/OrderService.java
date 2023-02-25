@@ -14,4 +14,6 @@ public interface OrderService {
     Order saveOrUpdateOrder(Order order);
 
     Order getOrderById(int id);
+
+    void deleteOrderById(int id);
 }

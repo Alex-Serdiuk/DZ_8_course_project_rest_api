@@ -25,4 +25,9 @@ public class OrderServiceImpl implements OrderService{
     public Order getOrderById(int id) {
         return orderRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public void deleteOrderById(int id) {
+        orderRepository.deleteById(id);
+    }
 }

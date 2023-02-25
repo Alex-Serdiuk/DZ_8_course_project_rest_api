@@ -30,4 +30,9 @@ public class ServiceServiceImpl implements ServiceService {
     public List<com.example.dz_8_course_project_rest_api.entity.Service> getServiceByName(String name) {
         return serviceRepository.findAllByServiceName(name);
     }
+
+    @Override
+    public void deleteServiceById(int id) {
+        serviceRepository.deleteById(id);
+    }
 }

@@ -8,36 +8,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/brands")
 public class BrandController {
     @Autowired
     private BrandService brandService;
 
-    @GetMapping("/brands")
+    @GetMapping
     public List<Brand>getAllBrands(){
         return brandService.getAllBrands();
     }
 
-    @GetMapping("/brands/{id}")
+    @GetMapping("/{id}")
     public Brand getBrandById(@PathVariable int id){
         return brandService.getBrandById(id);
     }
 
-    @PostMapping("/brands")
+    @PostMapping
     public Brand addBrand(@RequestBody Brand brand){
         return brandService.saveOrUpdateBrand(brand);
     }
 
-    @PutMapping("/brands")
+    @PutMapping
     public Brand updateBrand(@RequestBody Brand brand){
         return brandService.saveOrUpdateBrand(brand);
     }
 
-    @GetMapping("/brands/name/{name}")
+    @GetMapping("/name/{name}")
     public List<Brand>getBrandsByName(@PathVariable String name){
         return brandService.getBrandByName(name);
     }
 
-    @DeleteMapping("brands/{id}")
+    @DeleteMapping("/{id}")
     public String deleteBrandById(@PathVariable int id){
         String result;
 

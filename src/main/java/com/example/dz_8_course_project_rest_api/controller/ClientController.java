@@ -8,32 +8,50 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/clients")
 public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @GetMapping("/clients")
+    @GetMapping
     public List<Client>getAllClients(){
         return clientService.getAllClients();
     }
 
-    @GetMapping("/clients/{id}")
+    @GetMapping("/{id}")
     public Client getClientById(@PathVariable int id){
         return clientService.getClientById(id);
     }
 
-    @PostMapping("/clients")
+    @PostMapping
     public Client addClient(@RequestBody Client client){
         return clientService.saveOrUpdateClient(client);
     }
 
-    @PutMapping("/clients")
+    @PutMapping
     public  Client updateClient(@RequestBody Client client){
         return clientService.saveOrUpdateClient(client);
     }
 
-    @GetMapping("/clients/last_name/{lastName}")
+    @GetMapping("/last_name/{lastName}")
     public List<Client>getClientByLastName(@PathVariable String lastName){
         return clientService.getClientByLastName(lastName);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteClientById(@PathVariable int id){
+        String result;
+
+        if(clientService.getClientById(id)!=null){
+            clientService.deleteClientById(id);
+            if(clientService.getClientById(id)==null){
+                result = "Client was deleted";
+            }else {
+                result = "Client was not deleted";
+            }
+        }else {
+            result = "The id is not in the database"; // повідомлення у разі відсутності об'єкта з вказаним id у БД
+        }
+        return result;
     }
 }

@@ -9,31 +9,49 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/cars")
 public class CarController {
     @Autowired
     private CarService carService;
 
-    @GetMapping("/cars")
+    @GetMapping
     public List<Car>getAllCars(){
         return carService.getAllCars();
     }
-    @GetMapping("/cars/{id}")
+    @GetMapping("/{id}")
     public Car getCarById(@PathVariable int id){
         return carService.getCarById(id);
     }
 
-    @PostMapping("/cars")
+    @PostMapping
     public Car addCar(@RequestBody Car car){
         return carService.saveOrUpdateCar(car);
     }
 
-    @PutMapping("/cars")
+    @PutMapping
     public Car updateCar(@RequestBody Car car){
         return carService.saveOrUpdateCar(car);
     }
 
-    @GetMapping("/cars/model/{name}")
+    @GetMapping("/model/{name}")
     public List<Car>getCarsByModelName(@PathVariable String name){
         return carService.getCarByName(name);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteCarById(@PathVariable int id){
+        String result;
+
+        if(carService.getCarById(id)!=null){
+            carService.deleteCarById(id);
+            if(carService.getCarById(id)==null){
+                result = "Car was deleted";
+            }else {
+                result = "Car was not deleted";
+            }
+        }else {
+            result = "The id is not in the database"; // повідомлення у разі відсутності об'єкта з вказаним id у БД
+        }
+        return result;
     }
 }

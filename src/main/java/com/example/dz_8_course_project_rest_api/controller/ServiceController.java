@@ -8,32 +8,50 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/services")
 public class ServiceController {
     @Autowired
     private ServiceService serviceService;
 
-    @GetMapping("/services")
+    @GetMapping
     public List<Service>getAllService(){
         return serviceService.getAllServices();
     }
 
-    @GetMapping("/services/{id}")
+    @GetMapping("/{id}")
     public Service getServiceById(@PathVariable int id){
         return serviceService.getServiceById(id);
     }
 
-    @PostMapping("/services")
+    @PostMapping
     public Service addService(@RequestBody Service service){
         return serviceService.saveOrUpdateService(service);
     }
 
-    @PutMapping("/services")
+    @PutMapping
     public Service updateService(@RequestBody Service service){
         return serviceService.saveOrUpdateService(service);
     }
 
-    @GetMapping("/services/name/{name}")
+    @GetMapping("/name/{name}")
     public List<Service>getServicesByName(@PathVariable String name){
         return serviceService.getServiceByName(name);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteServiceById(@PathVariable int id){
+        String result;
+
+        if(serviceService.getServiceById(id)!=null){
+            serviceService.deleteServiceById(id);
+            if(serviceService.getServiceById(id)==null){
+                result = "Service was deleted";
+            }else {
+                result = "Service was not deleted";
+            }
+        }else {
+            result = "The id is not in the database"; // повідомлення у разі відсутності об'єкта з вказаним id у БД
+        }
+        return result;
     }
 }
